@@ -16,7 +16,7 @@ How to use
 1. Add it to your `Gemfile` and `bundle install` that thing.
 2. Generate the models and migrations:
 
-        rails generate simplest_photo:install
+        rails generate simplest_photo
 
 3. Do some `rake db:migrate`
 4. Configure your models:
