@@ -14,12 +14,16 @@ How to use
 ----------
 
 1. Add it to your `Gemfile` and `bundle install` that thing.
-2. Generate the models and migrations:
+2. Generate the Dragonfly config:
+
+        rails generate dragonfly
+
+3. Generate the models and migrations:
 
         rails generate simplest_photo
 
-3. Do some `rake db:migrate`
-4. Configure your models:
+4. Do some `rake db:migrate`
+5. Configure your models:
 
         class Dinosaur < ActiveRecord::Base
           extend SimplestPhoto::HasPhoto
@@ -28,7 +32,7 @@ How to use
           has_photo :centerfold
         end
 
-5. Update your Dragonfly config to generate `PhotoCropping`s:
+6. Update your Dragonfly config to generate `PhotoCropping`s:
 
         # config/initializers/dragonfly.rb
         Dragonfly.app.configure do
