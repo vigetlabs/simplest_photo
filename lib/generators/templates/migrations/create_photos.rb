@@ -5,7 +5,7 @@ class CreatePhotos < ActiveRecord::Migration
       t.string :image_uid,  null: false
       t.string :image_name
 
-      t.timestamps null: true
+      t.timestamps null: false
     end
   end
 end

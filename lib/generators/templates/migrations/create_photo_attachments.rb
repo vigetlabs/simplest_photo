@@ -5,7 +5,7 @@ class CreatePhotoAttachments < ActiveRecord::Migration
       t.references :attachable,      null: false, polymorphic: true
       t.string     :attachable_name, null: false
 
-      t.timestamps null: true
+      t.timestamps null: false
 
       t.index [:photo_id, :attachable_id, :attachable_type, :attachable_name],
               name: 'index_photo_attachments_on_attachable_fields',

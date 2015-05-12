@@ -5,7 +5,7 @@ class CreatePhotoCroppings < ActiveRecord::Migration
       t.string     :signature, null: false
       t.string     :uid,       null: false
 
-      t.timestamps null: true
+      t.timestamps null: false
 
       t.index :signature
     end
