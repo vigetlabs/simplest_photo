@@ -17,6 +17,8 @@ module SimplestPhoto
                              if: :image_changed?
 
           scope :by_name, -> { order(name: :asc) }
+
+          delegate :url, :thumb, to: :image
         end
       end
 
