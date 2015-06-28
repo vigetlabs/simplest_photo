@@ -13,7 +13,7 @@ module SimplestPhoto
 
           validates_property :format,
                              of: :image,
-                             in: %w(jpeg jpg png),
+                             in: %w(jpeg jpg png gif bmp),
                              if: :image_changed?
 
           scope :by_name, -> { order(name: :asc) }
