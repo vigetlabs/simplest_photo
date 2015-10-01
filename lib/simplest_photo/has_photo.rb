@@ -1,7 +1,7 @@
 module SimplestPhoto
   module HasPhoto
 
-    def has_photo(name, options = {})
+    def has_photo(name, required: false, on: nil)
       has_one :"#{name}_attachment",
               -> { where(attachable_name: name) },
               as:         :attachable,
@@ -12,8 +12,8 @@ module SimplestPhoto
               through: "#{name}_attachment",
               source:  :photo
 
-      if options.delete(:required)
-        validates name, options.merge(presence: true)
+      if required
+        validates name, presence: true, on: on
       end
 
       foreign_key = "#{name}_id"
