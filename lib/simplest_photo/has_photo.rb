@@ -1,7 +1,7 @@
 module SimplestPhoto
   module HasPhoto
 
-    def has_photo(name, required: false, on: nil)
+    def has_photo(name, required: false, on: %i(create update))
       has_one :"#{name}_attachment",
               -> { where(attachable_name: name) },
               as:         :attachable,
