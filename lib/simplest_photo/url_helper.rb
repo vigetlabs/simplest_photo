@@ -20,10 +20,16 @@ module SimplestPhoto
       end
 
       config.before_serve do |job, env|
-        photo = Photo.with_image_uid!(job.uid)
-        uid   = job.store
+        existing = PhotoCropping.find_by(signature: job.signature)
 
-        PhotoCropping.create!(photo: photo, uid: uid, signature: job.signature)
+        if existing
+          throw :halt, [301, { 'Location' => job.app.remote_url_for(existing.uid) }, [""]]
+        else
+          photo = Photo.with_image_uid!(job.uid)
+          uid   = job.store
+
+          PhotoCropping.create!(photo: photo, uid: uid, signature: job.signature)
+        end
       end
     end
 
