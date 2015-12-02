@@ -8,6 +8,8 @@ module SimplestPhoto
 
           before_destroy :delete_file
 
+          validates :signature, uniqueness: true
+
 
           private
 

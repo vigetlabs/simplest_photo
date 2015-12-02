@@ -7,7 +7,7 @@ class CreatePhotoCroppings < ActiveRecord::Migration
 
       t.timestamps null: false
 
-      t.index :signature
+      t.index :signature, unique: true
     end
 
     add_foreign_key :photo_croppings, :photos, on_delete: :cascade
