@@ -87,3 +87,11 @@ Standard stuff. It also defines `#headshot_id` and `#headshot_id=` accessors, wh
 
     f.input :headshot_id, collection: Photo.all
 
+
+***
+
+<a href="http://code.viget.com">
+  <img src="http://code.viget.com/github-banner.png" alt="Code At Viget">
+</a>
+
+Visit [code.viget.com](http://code.viget.com) to see more projects from [Viget.](https://viget.com)
