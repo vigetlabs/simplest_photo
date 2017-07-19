@@ -3,7 +3,7 @@ require 'active_model/validator'
 module SimplestPhoto
   module Model
     module Validations
-      class AttachmentPropertyValidator < Dragonfly::Model::Validations::PropertyValidator
+      class AttachmentPropertyValidator < ::Dragonfly::Model::Validations::PropertyValidator
         include ActiveModel::Validations::Clusivity
 
         def validate_each(model, attribute, attachment)
@@ -13,7 +13,7 @@ module SimplestPhoto
             end
           end
         rescue RuntimeError => e
-          Dragonfly.warn("validation of property #{property_name} of #{attribute} failed with error #{e}")
+          ::Dragonfly.warn("validation of property #{property_name} of #{attribute} failed with error #{e}")
           model.errors.add(attribute, message(nil, model))
         end
 
