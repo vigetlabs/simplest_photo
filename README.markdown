@@ -87,3 +87,13 @@ Standard stuff. It also defines `#headshot_id` and `#headshot_id=` accessors, wh
 
     f.input :headshot_id, collection: Photo.all
 
+### Customizations
+
+To customize the valid image file extensions (which defaults to allowing `.jpg`, `.jpeg`, or `.png` extensions), override the `valid_image_extensions` method in the generated `Photo` model:
+```ruby
+class Photo < ActiveRecord::Base
+  def valid_image_extensions
+    %w(jpg jpeg png gif)
+  end
+end
+```
