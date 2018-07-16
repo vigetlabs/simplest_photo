@@ -1,4 +1,4 @@
-class CreatePhotos < ActiveRecord::Migration
+class CreatePhotos < ActiveRecord::Migration::Current
   def change
     create_table :photos do |t|
       t.string :name,       null: false

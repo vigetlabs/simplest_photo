@@ -1,4 +1,4 @@
-class CreatePhotoCroppings < ActiveRecord::Migration
+class CreatePhotoCroppings < ActiveRecord::Migration::Current
   def change
     create_table :photo_croppings do |t|
       t.references :photo,     null: false

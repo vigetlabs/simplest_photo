@@ -1,4 +1,4 @@
-class CreatePhotoAttachments < ActiveRecord::Migration
+class CreatePhotoAttachments < ActiveRecord::Migration::Current
   def change
     create_table :photo_attachments do |t|
       t.references :photo,           null: false
