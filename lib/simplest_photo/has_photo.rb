@@ -21,7 +21,7 @@ module SimplestPhoto
       # Save the associated target that was set in the [attr]_id= method
       # definition.
       after_save do
-        if attribute_changed?(foreign_key)
+        if saved_change_to_attribute?(foreign_key)
           association(name).replace(association(name).target)
         end
       end
