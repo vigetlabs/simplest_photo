@@ -8,6 +8,7 @@ SimplestPhoto ...
 * is dead simple to use
 * is easy to change—migrations and models live in your app and you can do whatever you want to them
 * caches your Dragonfly-processed images for you
+* **Requires Rails >= 5.1.** For prior versions, use the `0.1.0` release.
 
 
 How to use
