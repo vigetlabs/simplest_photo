@@ -42,6 +42,13 @@ module SimplestPhoto
           # For ActiveModel::Dirty
           attribute_will_change!(foreign_key)
 
+          # In accepts_nested_attributes_for scenarios, the nested model
+          # doesn't save if the photo ID is the only thing that's changed.
+          # So, we force a save by updating the timetamp.
+          if attribute_names.include?("updated_at")
+            self.updated_at = current_time_from_proper_timezone
+          end
+
           # Set the target of this association without saving to the database
           association(name).target = Photo.where(id: new_id).first
 
