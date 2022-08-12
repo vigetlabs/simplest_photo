@@ -1,65 +1,11 @@
 module SimplestPhoto
   module HasPhoto
-
-    def has_photo(name, required: false, on: %i(create update))
-      has_one :"#{name}_attachment",
-              -> { where(attachable_name: name) },
-              as:         :attachable,
-              class_name: 'PhotoAttachment',
-              dependent:  :destroy
-
-      has_one name.to_sym,
-              through: "#{name}_attachment",
-              source:  :photo
-
-      if required
-        validates name, presence: true, on: on
-      end
-
-      foreign_key = "#{name}_id"
-
-      # Save the associated target that was set in the [attr]_id= method
-      # definition.
-      after_save do
-        if saved_change_to_attribute?(foreign_key)
-          association(name).replace(association(name).target)
-        end
-      end
-
-
-      define_method foreign_key do
-        ivar = "@#{foreign_key}"
-
-        return instance_variable_get(ivar) if instance_variable_defined?(ivar)
-
-        instance_variable_set(ivar, self.send(name).try(:id))
-      end
-
-      define_method "#{foreign_key}=" do |new_id|
-        ivar = "@#{foreign_key}"
-
-        unless new_id.to_i == instance_variable_get(ivar)
-          # For ActiveModel::Dirty
-          attribute_will_change!(foreign_key)
-
-          # In accepts_nested_attributes_for scenarios, the nested model
-          # doesn't save if the photo ID is the only thing that's changed.
-          # So, we force a save by updating the timetamp.
-          if attribute_names.include?("updated_at")
-            self.updated_at = current_time_from_proper_timezone
-          end
-
-          # Set the target of this association without saving to the database
-          association(name).target = Photo.where(id: new_id).first
-
-          instance_variable_set(ivar, new_id)
-        end
-      end
-
-      define_method "#{name}?" do
-        send(name).present?
-      end
+   def self.extended(base)
+      base.extend Model::HasAttachment
     end
 
+    def has_photo(name, options = {})
+      has_attachment name, options.merge(class_name: 'Photo')
+    end
   end
 end
