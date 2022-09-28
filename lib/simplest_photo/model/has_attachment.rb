@@ -25,7 +25,7 @@ module SimplestPhoto
         # definition.
         after_save do
           if saved_change_to_attribute?(foreign_key)
-            association(name).replace(association(name).target)
+            association(name).send(:replace, association(name).target)
           end
         end
 
